@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <style rel="stylesheet">
+
+      body {
+        text-align: center;
+      }
+      #btn,
+      #changeColor,
+      #sortNumber {
+        line-height: 30px;
+        background-color: blue;
+        opacity: .7;
+        filter: opacity(70);
+        cursor: pointer;
+        font-size: 22px;
+        color: #fff;
+      }
+
+      input {
+        height: 26px;
+        background-color: rgba(0,0,0,.4);
+        color: #000;
+        font-size: 22px;
+        width: 140px;
+       text-align: center;
+      }
+
+      table {
+        margin: auto;
+      }
+    </style>
+</head>
+<body>
+<button id="btn">show table</button>
+<input id="row" type="text" placeholder="请输入行号" />
+<input id="col" type="text" placeholder="请输入列号" />
+<button id="changeColor">changeBorderColor</button>
+<input id="showColor" type="color">
+<script src="js/createTable.js"></script>
+<script src="js/sortNumber.js"></script>
+</body>
+</html>
