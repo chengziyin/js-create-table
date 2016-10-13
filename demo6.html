@@ -8,9 +8,7 @@
       body {
         text-align: center;
       }
-      #btn,
-      #changeColor,
-      #sortNumber {
+      button {
         line-height: 30px;
         background-color: blue;
         opacity: .7;
@@ -37,10 +35,13 @@
 <body>
 <button id="btn">show table</button>
 <input id="row" type="text" placeholder="请输入行号" />
+<button id="rowAdd">+1</button>
 <input id="col" type="text" placeholder="请输入列号" />
+<button id="colAdd">+1</button>
 <button id="changeColor">changeBorderColor</button>
 <input id="showColor" type="color">
 <script src="js/createTable.js"></script>
 <script src="js/sortNumber.js"></script>
+<script src="js/changeTable.js"></script>
 </body>
 </html>

@@ -25,7 +25,12 @@ function sortNumberFun(){
 		arr[i] = tdNumber[i].innerHTML;
 	}
 	arr.sort(numberSort);
-	showDiv.innerHTML = arr;
+	// showDiv.innerHTML = arr;
+	var arr2 = '';
+	for(var i = 0; i < arr.length; i ++){
+		arr2 += arr[i] + '&nbsp;';
+	}
+	showDiv.innerHTML = arr2;
 	showDiv.style.wordBreak = 'break-all';
 }
 
