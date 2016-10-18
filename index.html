@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>homework</title>
+</head>
+<body>
+	<script>
+
+		var sites = [
+			{"name":'百度',"url":'http://www.baidu.com'},
+			{"name":'新浪',"url":'http://www.sina.com'},
+			{"name":'腾讯',"url":'http://www.qq.com'},
+			{"name":'淘宝',"url":'http://www.taobao.com'}
+		]
+
+		var body = document.getElementsByTagName('body')[0];
+		body.style.textAlign = 'center';
+
+
+		var btn1 = document.createElement('button');
+		btn1.setAttribute('ID','btn1');
+		btn1.innerHTML = '创建列表';
+
+		var btn2 = document.createElement('button');
+		btn2.setAttribute('ID','btn2');
+		btn2.innerHTML = '增加列表';
+
+		var btn3 = document.createElement('button');
+		btn3.setAttribute('ID','btn3');
+		btn3.innerHTML = '删除列表';
+
+		body.appendChild(btn1);
+		body.appendChild(btn2);
+		body.appendChild(btn3);
+
+		var btnList = document.getElementsByTagName('button');
+		for(var i = 0; i < btnList.length; i ++){
+			btnList[i].style.fontSize = '20px';
+			btnList[i].style.padding = '5px';
+			btnList[i].style.cursor = 'pointer';
+			btnList[i].style.marginRight = '20px';
+			btnList[i].style.backgroundColor = 'blue';
+			btnList[i].style.color = '#fff';
+		}
+
+		btn1.onclick = function(){
+
+			var liList = document.getElementsByTagName('li');
+			var ulL = document.getElementsByTagName('ul')[0];
+			if(liList.length > 0){
+				return;
+			}else if(liList.length == 0){
+				if(ulL){
+					ulL.remove();
+				}
+			}
+			var ulList = document.createElement('ul'); 
+			for(var i = 0; i < sites.length; i ++){
+			var liItem = document.createElement('li');
+			liItem.style.listStyle = 'none';
+			liItem.style.float = 'left';
+			liItem.style.marginRight = '30px';
+			liItem.style.backgroundColor = '#3f3';
+			liItem.style.display = 'flex';
+			liItem.style.alignItem = 'center';
+			var link = document.createElement('a');
+			link.style.textDecoration = 'none';
+			link.style.color = '#444';
+			link.style.padding = '5px';
+			link.innerHTML = sites[i].name;
+			link.setAttribute('href',sites[i].url);
+			liItem.appendChild(link);
+			ulList.appendChild(liItem);
+			body.appendChild(ulList);
+			}
+			var liBtn = document.getElementsByTagName('li');
+			for(var i = 0; i < liBtn.length; i ++){
+				liBtn[i].onmouseover = function(){
+					this.style.backgroundColor = '#f00';
+					this.childNodes[0].style.color = '#fff';
+				}
+				liBtn[i].onmouseout = function(){
+					this.style.backgroundColor = '#3f3';
+					this.childNodes[0].style.color = '#444';
+				}
+			}
+
+			ulList.style.display = 'flex';
+			ulList.style.height = '28px';
+			ulList.style.justifyContent = 'center';
+		}
+
+		btn2.onclick = function(){
+			if(document.getElementsByTagName('ul').length == 0){
+				alert('请先创建列表！');
+				return;
+			}
+
+			var reg = /[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/;   
+
+			var txtName = prompt("请输入要添加的链接的名称");
+			var name = '';
+			var url = '';
+			if(txtName != null){
+				name = txtName;
+				var txtUrl = prompt("请输入要添加的链接的url地址");
+				if(txtUrl != null){
+					if(!(reg.test(txtUrl))){
+						alert('请输入正确的url地址！');
+					}
+					else{
+						url = txtUrl;
+						var ulAdd = document.getElementsByTagName('ul')[0];
+						var addLi = document.createElement('li');
+						addLi.style.listStyle = 'none';
+						addLi.style.float = 'left';
+						addLi.style.marginRight = '30px';
+						addLi.style.backgroundColor = '#3f3';
+						addLi.style.display = 'flex';
+						addLi.style.alignItem = 'center';
+						var addLink = document.createElement('a');
+						addLink.style.textDecoration = 'none';
+						addLink.style.color = '#444';
+						addLink.style.padding = '5px';
+						addLink.innerHTML = txtName;
+						addLink.setAttribute('href',txtUrl);
+						addLi.appendChild(addLink);
+						ulAdd.appendChild(addLi);
+						}
+				}else{
+					alert('Thanks!');
+				}
+			}else{
+				alert('Thanks!');
+			}
+		}
+
+		btn3.onclick = function(){
+			if(document.getElementsByTagName('ul').length == 0){
+				alert('请先创建列表！');
+				return;
+			}
+			var deleteUl = document.getElementsByTagName('ul')[0];
+			var deleteLi = document.getElementsByTagName('li');
+			var alertTxt = prompt('请输入要删除的选项或输入all删除整个列表','all');
+			
+
+				if(alertTxt == ''  || alertTxt == null){
+					alert('请输入要删除的选项！');
+				}
+				else if(alertTxt == 'all'){
+					deleteUl.remove();
+				}else if(Number(alertTxt) >= 0){
+					var l = deleteLi.length;
+					if(Number(alertTxt) >= l){
+						alert('你输入的数字有误，请重新输入！');
+					}else if(Number(alertTxt) >= 0 && Number(alertTxt) < l){
+						for(var i = 0; i < l; i ++){
+							deleteUl.removeChild(deleteLi[Number(alertTxt)]);
+							return;
+						}
+					}
+				}else if(!Number(alertTxt)){
+					alert('请输入数字！');
+				}
+		}
+
+		
+	</script>
+</body>
+</html>
