@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>demo5</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react-dom.js"></script>
+  <script src="../build/browser.min.js"></script>
+  <style>
+    #btn {
+      display: block;
+      margin: 30px auto;
+      font-size: 20px;
+      padding: 5px;
+      cursor: pointer;
+      background-color: rgba(0,0,255,.6);
+      color: #fff;
+    }
+
+    #oDiv {
+      background-color: rgba(0,0,0,.6);
+      width: 100%;
+      height: 1000px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+    h2 {
+      color: #f00;
+    }
+    
+    .alertShow {
+      margin-left: 10px;
+      color: #f00;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    var body = document.body;
+    var btn = document.createElement('button');
+    btn.innerHTML = 'click button';
+    btn.setAttribute('ID','btn');
+    body.appendChild(btn);
+  </script>
+  <script type="text/babel">
+    var myStyles = {
+      width: 420,
+      height: 220,
+      backgroundColor: '#fff',
+      position: 'relative',
+      top: '100',
+      left: '350'
+    };
+
+    var HeaderStyle = {
+      width: '100%',
+      height: 40,
+      fontSize:30,
+      backgroundColor: 'blue',
+      color: '#fff',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      letterSpacing: '30'
+    };
+
+    var pStyle = {
+      display: 'flex',
+      justifyContent: 'center',
+      height: 20
+    };
+
+    var buttonStyle = {
+      display: 'block',
+      margin:'auto',
+      fontSize: 20,
+      padding: 5,
+      cursor: 'pointer',
+      backgroundColor: 'rgba(0,0,255,.6)',
+      color: '#fff'
+    };
+
+    var CreateDiv = React.createClass({
+      render: function(){
+        return <div>
+          <CreateLogDiv />
+        </div>;
+      }
+    });
+
+    var CreateLogDiv = React.createClass({
+      render: function(){
+        return <div style = {myStyles}>
+          <h2 style = {HeaderStyle}>请登陆!</h2>
+          <Items />
+          </div>;
+      }
+    });
+
+    var Items = React.createClass({
+      render: function(){
+        return <div>
+          <p style = {pStyle}><label>用户名：</label><input type="text" /><span className="alertShow">*</span></p>
+          <p style = {pStyle}><label>密&nbsp;码：</label><input type="password" /><span className="alertShow">*</span></p>
+          <CreateButton />
+        </div>;
+      }
+    });
+
+    var CreateButton = React.createClass({
+      render: function(){
+        return <button style = {buttonStyle} id="logBtn">登陆</button>
+      }
+    });
+
+    var btnButton = document.getElementById('btn');
+    btn.onclick = function(){
+      var logButton = document.createElement('div');
+      logButton.setAttribute('ID','oDiv');
+      body.appendChild(logButton);
+
+      ReactDOM.render(
+              < CreateDiv />,
+              document.getElementById('oDiv')
+      )
+
+      var oBtn = document.getElementById('logBtn');
+      var inTxt = document.getElementsByTagName('input');
+      var alertShow = document.getElementsByClassName('alertShow');
+      oBtn.onclick = function(){
+        if(inTxt[0].value == null || inTxt[0].value == ''){
+          alert('请输入用户名！');
+          alertShow[0].style.display = 'block';
+          return;
+        }else if(inTxt[1].value == ''){
+          alert('请输入密码！');
+          alertShow[1].style.display = 'block';
+          return;
+        }
+        document.write('Welcome back:' + inTxt[0].value);
+      }
+    }
+  </script>
+</body>
+</html>
